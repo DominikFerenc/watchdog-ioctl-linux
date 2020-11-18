@@ -18,14 +18,6 @@
 
 //using namespace std;
 
-int openFile()
-{
-  const char * path_to_file = "/dev/watchdog";
-  std::fstream file;
-  file.open(path_to_file, std::ios::in | std::ios::out);
-
-}
-
 int main()
 {
   WatchDogIoctl watchDog;
