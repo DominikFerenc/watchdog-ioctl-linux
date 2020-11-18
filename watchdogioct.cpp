@@ -1,66 +1,41 @@
-#include "watchdogioct.h"
+#include "watchdogioctl.h"
 
-WatchDogIoctl::WatchDogIoctl 
+WatchDogIoctl::WatchDogIoctl()
 {
-    
-    is_file_open = openFile(); 
-    ioctlLoop(is_file_open); 
-
+    file_is_open = openFile();
+    ioctlLoop(file_is_open);
 }
 
 WatchDogIoctl::~WatchDogIoctl() {}
 
 bool WatchDogIoctl::openFile()
-}
- 
-  bool file_is_open = false; 
-  
-  //file.open(file_2, std::ios::in | std::ios::out);
-  file_watchdog = open(dev, O_RDWR);
+{
+  file_watchdog = open(path_to_watchdog_file, O_RDWR);
   if (file_watchdog >= -1)
   {
-    std::cout << "File is open" << std::endl; 
-    file_is_open = true; 
-  } 
-  else 
-  {
-    std::cout << "File not open" << std::endl; 
-    file_is_open = false; 
+    std::cout << "The file was opened correctly" << std::endl;
+    file_is_open = true;
   }
-
-  int fd = file.rdbuff()
-  return file_is_open; 
+  else
+  {
+    std::cout << "The file did not open correctly." << std::endl;
+    file_is_open = false;
+  }
+  return file_is_open;
 }
 
-void WatchDogIoctl::ioctlLoop(bool is_file_open) 
+void WatchDogIoctl::ioctlLoop(bool is_file_open)
 {
-  if (is_open_file)
+  if (file_is_open)
   {
-    while (1) 
+    while (true)
     {
       ioctl(file_watchdog, WDIOC_KEEPALIVE, 0);
-      std::cout << "Working.." << std::endl;
-      std::cout << "goo function: " << std::endl; 
+      std::cout << "I'm working.." << std::endl;
       sleep(3);
     }
   }
+  close(file_watchdog);
 }
 
-int main()
-{
-    
-    
 
-     //char * dev = WATCHDOGDEV;
-     int interval = 0;
-     char kick_watchdog = 0;
-     int fd;
-
-   /*if (fd = open(dev, O_RDWR) < -1){
-
-   }*/
-
-  WatchDogIoctl watchDog; 
-  
-  return 0;
-}
