@@ -21,7 +21,7 @@ class WatchDogIoctl
         ~WatchDogIoctl();
         bool openFile();
         void ioctlLoop(bool isFileOpen);
-        //bool file_is_open = false;
 };
 
 #endif // WATCHDOGIOCTL_H
+
